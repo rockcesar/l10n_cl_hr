@@ -20,17 +20,25 @@ class HrSalaryRule(models.Model):
         """
         self.ensure_one()
         if self.amount_select == 'fix':
+            return self.amount_fix, float(safe_eval(self.quantity, localdict)), 100.0
+            """
             try:
                 return self.amount_fix, float(safe_eval(self.quantity, localdict)), 100.0
             except:
                 raise UserError(_('Wrong quantity defined for salary rule %s (%s).') % (self.name, self.code))
+            """
         elif self.amount_select == 'percentage':
+            return (float(safe_eval(self.amount_percentage_base, localdict)),
+                        float(safe_eval(self.quantity, localdict)),
+                        self.amount_percentage)
+            """
             try:
                 return (float(safe_eval(self.amount_percentage_base, localdict)),
                         float(safe_eval(self.quantity, localdict)),
                         self.amount_percentage)
             except:
                 raise UserError(_('Wrong percentage base or quantity defined for salary rule %s (%s).') % (self.name, self.code))
+            """
         else:
             safe_eval(self.amount_python_compute, localdict, mode='exec', nocopy=True)
             return float(localdict['result']), 'result_qty' in localdict and localdict['result_qty'] or 1.0, 'result_rate' in localdict and localdict['result_rate'] or 100.0
