@@ -49,3 +49,34 @@ class HrSalaryRule(models.Model):
             except:
                 raise UserError(_('Wrong python code defined for salary rule %s (%s).') % (self.name, self.code))
             """
+
+    @api.multi
+    def _satisfy_condition(self, localdict):
+        """
+        @param contract_id: id of hr.contract to be tested
+        @return: returns True if the given rule match the condition for the given contract. Return False otherwise.
+        """
+        self.ensure_one()
+
+        if self.condition_select == 'none':
+            return True
+        elif self.condition_select == 'range':
+            result = safe_eval(self.condition_range, localdict)
+            return self.condition_range_min <= result and result <= self.condition_range_max or False
+            """
+            try:
+                result = safe_eval(self.condition_range, localdict)
+                return self.condition_range_min <= result and result <= self.condition_range_max or False
+            except:
+                raise UserError(_('Wrong range condition defined for salary rule %s (%s).') % (self.name, self.code))
+            """
+        else:  # python code
+            safe_eval(self.condition_python, localdict, mode='exec', nocopy=True)
+            return 'result' in localdict and localdict['result'] or False
+            """
+            try:
+                safe_eval(self.condition_python, localdict, mode='exec', nocopy=True)
+                return 'result' in localdict and localdict['result'] or False
+            except:
+                raise UserError(_('Wrong python condition defined for salary rule %s (%s).') % (self.name, self.code))
+            """
