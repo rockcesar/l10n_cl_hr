@@ -7,9 +7,9 @@
 		<field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
 		<field name="arch" type="xml">
 			<xpath expr="//div[@name='wage']" position="after">
-				<field name="otros_imp" string="Otros Imponible" invisible="1" />
+				<field name="otros_imp" string="Otros Imponible" invisible="0" />
 				<field name="otro_no_imp" string="Otros No Imponible"
-					invisible="1" />
+					invisible="0" />
 				<label for="colacion" />
 				<div name="colacion">
 					<field name="colacion" string="Asig. de Colación" />
