@@ -14,6 +14,29 @@
                     <field name="date_start_mp" String="Inicio MP" attrs="{'invisible': [('movimientos_personal', '=', '0')]}"/>
                     <field name="date_end_mp" String="Fin MP" attrs="{'invisible': [('movimientos_personal', '=', '0')]}"/>
                 </field>
+                <field name="worked_days_line_ids" position="replace">
+                    <field name="worked_days_line_ids">
+                        <tree string="Worked Days" editable="bottom">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <!--<field name="number_of_days" sum="Total Working Days"/>-->
+                            <field name="number_of_days" />
+                            <field name="number_of_hours"/>
+                            <field name="contract_id"/>
+                            <field name="sequence" invisible="True"/>
+                        </tree>
+                        <form string="Worked Day">
+                            <group col="4">
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="sequence"/>
+                                <field name="number_of_days"/>
+                                <field name="number_of_hours"/>
+                                <field name="contract_id"/>
+                            </group>
+                        </form>
+                    </field>
+                </field>
             </field>
     </record>
 
