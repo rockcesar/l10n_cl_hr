@@ -176,7 +176,7 @@
                   </thead>
                   <tbody>
                    <tr>
-                       <td style="vertical-align:top;padding: 0px 2px 0px 2px;">
+                       <td style="vertical-align:top;padding: 0px 4px 0px 4px;">
                          <table class="table-condensed" width="100%">
                            <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="p">
                                <t t-if=" ('No Imponible' ==p.category_id.name) or ('No Imponible - Otros' ==p.category_id.name) or ('Imponible' ==p.category_id.name) or ('TOTIM' == p.code) or ('TOTNOI' == p.code)">
@@ -201,7 +201,7 @@
                            </tr>
                          </table>
                        </td>
-                       <td style="vertical-align:top;padding: 0px 2px 0px 2px;">
+                       <td style="vertical-align:top;padding: 0px 4px 0px 4px;">
                           <table class="table-condensed" width="100%">
                              <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="p">
                                 <t t-if="('Prevision' ==p.category_id.name) or ('Salud' ==p.category_id.name) or ('Descuentos' ==p.category_id.name) or ('Otros Descuentos' ==p.category_id.name) or ('TOD' == p.code) or ('TODELE' == p.code)">
